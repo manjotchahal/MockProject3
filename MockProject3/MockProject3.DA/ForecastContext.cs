@@ -10,7 +10,7 @@ namespace MockProject3.DA
 {
     class ForecastContext: DbContext
     {
-        public ForecastContext() : base("ForecastDb")
+        public ForecastContext() : base(Configuration.Get)
         {
 
         }
