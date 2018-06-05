@@ -29,7 +29,7 @@ namespace MockProject3.DA.Models
         [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required")
+        [Required(ErrorMessage = "Phone number is required")]
         [RegularExpression("[(]{1}[0-9]{3}[)]{1}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}", ErrorMessage = "Format must be (###) ###-####")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
