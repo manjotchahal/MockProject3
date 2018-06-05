@@ -14,11 +14,6 @@ namespace MockProject3.DA.Models
         [ScaffoldColumn(false)]
         public int UserID { get; set; }
 
-        [Required]
-        public int BatchID { get; set; }
-
-        public int RoomID { get; set; }
-
         [Required(ErrorMessage = "Name is required")]
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
@@ -50,6 +45,15 @@ namespace MockProject3.DA.Models
 
         DateTime Created { get; set; }
         DateTime Modified { get; set; }
+
+        public int? RoomID { get; set; }
+        [ForeignKey("RoomID")]
+        public virtual Room Room { get; set; }
+
+        [Required]
+        public int BatchID { get; set; }
+        [ForeignKey("BatchID")]
+        public virtual Batch Batch { get; set; }
     }
 
 }
