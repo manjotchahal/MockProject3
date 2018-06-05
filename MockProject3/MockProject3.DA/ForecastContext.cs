@@ -8,7 +8,7 @@ using MockProject3.DA.Models;
 
 namespace MockProject3.DA
 {
-    class ForecastContext: DbContext
+    public class ForecastContext: DbContext
     {
         //public static void Main(string[] args)
         //{
@@ -25,14 +25,13 @@ namespace MockProject3.DA
         {
 
         }
-
-        //private static DbContextOptions GetOptions(string connectionString)
-        //{
-        //    return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
-        //}
-
         
 
+        private static DbContextOptions GetOptions(string connectionString)
+        {
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
+        }
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Batch> Batches { get; set; }
