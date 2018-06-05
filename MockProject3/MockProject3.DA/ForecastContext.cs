@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Logging;
 using MockProject3.DA.Models;
+using MockProject3.DA;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 
 namespace MockProject3.DA
 {
@@ -12,9 +16,9 @@ namespace MockProject3.DA
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Creating db");
-            ForecastContext db = new ForecastContext(GetOptions("ForecastDB"));
-            db.SaveChanges();
+            //Console.WriteLine("Creating db");
+            //ForecastContext db = new ForecastContext(GetOptions("ForecastDB"));
+            //db.SaveChanges();
         }
 
 
