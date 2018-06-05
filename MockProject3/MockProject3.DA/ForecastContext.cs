@@ -34,9 +34,9 @@ namespace MockProject3.DA
             return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
         }
 
-        public DbSet<Users> Users { get; set; }
-        public DbSet<Users> Rooms { get; set; }
-        public DbSet<Users> Batches { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Batch> Batches { get; set; }
 
         //IDbSet<TEntity> IDbContext.Set<TEntity>()
         //{
