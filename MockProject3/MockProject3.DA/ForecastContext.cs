@@ -16,9 +16,9 @@ namespace MockProject3.DA
     {
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Creating db");
-            //ForecastContext db = new ForecastContext(GetOptions("ForecastDB"));
-            //db.SaveChanges();
+            Console.WriteLine("Creating db");
+            ForecastContext db = new ForecastContext();
+            db.SaveChanges();
         }
 
 
@@ -26,16 +26,33 @@ namespace MockProject3.DA
         //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
 
 
-        public ForecastContext(DbContextOptions/*<ForecastContext>*/ options) : base(options)
-        {
+        //public ForecastContext(DbContextOptions/*<ForecastContext>*/ options) : base(options)
+        //{
 
+        //}
+
+        //private static DbContextOptions/*<ForecastContext>*/ GetOptions(string connectionString)
+        //{
+        //    return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
+        //}
+
+        public ForecastContext()
+        {
         }
 
-        private static DbContextOptions/*<ForecastContext>*/ GetOptions(string connectionString)
+        public ForecastContext(DbContextOptions<ForecastContext> options)
+            : base(options)
         {
-            return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDB2;User ID=sqladmin;Password=password123");
+            }
+        }
 
 
         public DbSet<User> Users { get; set; }
