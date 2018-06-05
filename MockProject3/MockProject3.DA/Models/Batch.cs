@@ -41,5 +41,7 @@ namespace MockProject3.DA.Models
         [DataType(DataType.DateTime)]
         [Column(TypeName = "datetime")] // The column is of datetime
         public DateTime? EndDate { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }
