@@ -10,6 +10,16 @@ namespace MockProject3.DA
 {
     class ForecastContext: DbContext
     {
+        //public static void Main(string[] args)
+        //{
+        //    Console.WriteLine("Creating db");
+        //    ForecastContext db = new ForecastContext();
+        //    db.SaveChanges();
+        //}
+
+        //connection string
+        //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
+
         public ForecastContext() : base("ForecastDb")
         {
 
