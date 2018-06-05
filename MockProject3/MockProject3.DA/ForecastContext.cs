@@ -20,19 +20,18 @@ namespace MockProject3.DA
         //connection string
         //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
 
-        public ForecastContext() : base(Configuration.Get)
+        
+        public ForecastContext(DbContextOptions<ForecastContext> options) : base(options)
         {
 
         }
 
-        public ForecastContext(string connectionString) : this(GetOptions(connectionString))
-        {
-        }
+        //private static DbContextOptions GetOptions(string connectionString)
+        //{
+        //    return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
+        //}
 
-        private static DbContextOptions GetOptions(string connectionString)
-        {
-            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
-        }
+        
 
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
