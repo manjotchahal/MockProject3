@@ -7,7 +7,7 @@ using System.Text;
 namespace MockProject3.DA.Models
 {
     [Table("Batches")]
-    class Batch
+    public class Batch
     {
         [Key] // The primary key
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Auto increment the primary key
