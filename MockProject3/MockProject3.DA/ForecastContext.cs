@@ -10,28 +10,30 @@ namespace MockProject3.DA
 {
     public class ForecastContext: DbContext
     {
-        //public static void Main(string[] args)
-        //{
-        //    Console.WriteLine("Creating db");
-        //    ForecastContext db = new ForecastContext();
-        //    db.SaveChanges();
-        //}
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Creating db");
+            ForecastContext db = new ForecastContext(GetOptions("ForecastDB"));
+            db.SaveChanges();
+        }
+
 
         //connection string
         //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
 
-        
-        public ForecastContext(DbContextOptions<ForecastContext> options) : base(options)
+
+        public ForecastContext(DbContextOptions/*<ForecastContext>*/ options) : base(options)
         {
 
         }
-        
 
-        private static DbContextOptions GetOptions(string connectionString)
+        private static DbContextOptions/*<ForecastContext>*/ GetOptions(string connectionString)
         {
-            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
+            return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
         }
-        
+
+
+
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Batch> Batches { get; set; }
