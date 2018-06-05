@@ -20,7 +20,7 @@ namespace MockProject3.DA
         //connection string
         //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
 
-        public ForecastContext() : base("ForecastDb")
+        public ForecastContext() : base(Configuration.Get)
         {
 
         }
