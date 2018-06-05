@@ -1,10 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
+using System.Collections.Generic;
 
 namespace MockProject3.DA.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,11 +15,11 @@ namespace MockProject3.DA.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
-                    Total = table.Column<int>(nullable: false),
-                    Technology = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime", nullable: false)
+                    Technology = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
+                    Total = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +32,8 @@ namespace MockProject3.DA.Migrations
                 {
                     RoomID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Capacity = table.Column<int>(nullable: false),
                     Address = table.Column<string>(type: "nvarchar(MAX)", maxLength: 200, nullable: false),
+                    Capacity = table.Column<int>(nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(MAX)", nullable: false)
                 },
                 constraints: table =>
@@ -46,13 +47,13 @@ namespace MockProject3.DA.Migrations
                 {
                     UserID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "nvarchar(MAX)", maxLength: 100, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(MAX)", maxLength: 200, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
+                    BatchID = table.Column<int>(nullable: false),
                     Email = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
-                    RoomID = table.Column<int>(nullable: true),
-                    BatchID = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(MAX)", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
+                    RoomID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
