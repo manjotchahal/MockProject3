@@ -26,7 +26,7 @@ namespace MockProject3.DA.Models
 
         [Required(ErrorMessage = "Address is required")]
         [DataType(DataType.Text)]
-        [StringLength(200, ErrorMessage = "Address cannot be more than 100 characters")]
+        [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Phone number is required")
@@ -40,6 +40,7 @@ namespace MockProject3.DA.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
+        [DataType(DataType.Text)]
         public string Gender { get; set; }
 
         DateTime Created { get; set; }
