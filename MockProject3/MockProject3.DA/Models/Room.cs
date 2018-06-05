@@ -6,8 +6,8 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
-    [Table("Room")]
-    class Room
+    [Table("Rooms")]
+    public class Room
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,11 +18,13 @@ namespace MockProject3.DA.Models
 
         [Required(ErrorMessage = "Address is required")]
         [DataType(DataType.Text)]
+        [Column(TypeName = "nvarchar(MAX)")]
         [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
         [DataType(DataType.Text)]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string Gender { get; set; }
     }
 }
