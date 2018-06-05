@@ -26,5 +26,7 @@ namespace MockProject3.DA.Models
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
         public string Gender { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }
