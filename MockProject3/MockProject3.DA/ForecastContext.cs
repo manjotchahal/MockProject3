@@ -14,12 +14,12 @@ namespace MockProject3.DA
 {
     public class ForecastContext: DbContext
     {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("Creating db");
-            ForecastContext db = new ForecastContext();
-            db.SaveChanges();
-        }
+        //public static void Main(string[] args)
+        //{
+        //    Console.WriteLine("Creating db");
+        //    ForecastContext db = new ForecastContext();
+        //    db.SaveChanges();
+        //}
 
 
         //connection string
