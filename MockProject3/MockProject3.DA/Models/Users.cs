@@ -6,8 +6,8 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
-    [Table("User")]
-    public class Users 
+    [Table("Users")]
+    public class User 
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
