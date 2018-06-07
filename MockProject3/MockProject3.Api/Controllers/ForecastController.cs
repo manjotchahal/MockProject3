@@ -21,10 +21,10 @@ namespace MockProject3.Api.Controllers
         private Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// This endpoint will return all Users to the caller.
+        /// This endpoint will return the total count of Users and Rooms to the caller.
         /// </summary>
         /// <return>
-        /// Return the total count of Users in the database.
+        /// Return the total count of Users and Rooms in the database.
         /// </return>
         // GET: api/forecast/Users
         [Route("Users")]
@@ -34,13 +34,16 @@ namespace MockProject3.Api.Controllers
             try
             {
                 List<User> users = new List<User>();
+                List<Room> rooms = new List<Room>();
+
                 using (ForecastContext db = new ForecastContext())
                 {
-                    // Lets query the db for the users
+                    // Lets query the db for the users and rooms
                     users = db.Users.ToList();
-                    if (users == null)
+                    rooms = db.Rooms.ToList();
+                    if (users == null || rooms == null)
                     {
-                        return NotFound("There are no users in the database.");
+                        return NotFound("There are no users/rooms in the database.");
                     }
                 }
                 return Ok(users.Count);
@@ -53,13 +56,13 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
-        /// This endpoint will return all Users to the caller using the search critiea of startdate.
+        /// This endpoint will return the total count of Users and Rooms to the caller using the search critiea of startdate.
         /// </summary>
         /// <remarks>
         /// The format for startDate is yyyy-mm-dd
         /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database with the match search critiea.
+        /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
         // GET: api/forecast/Users/startDate
         [HttpGet("Users/{startDate:datetime}")]
@@ -74,14 +77,16 @@ namespace MockProject3.Api.Controllers
                 }
 
                 List<User> users = new List<User>();
+                List<Room> rooms = new List<Room>();
 
                 using (ForecastContext db = new ForecastContext())
                 {
                     // Get all users that were created on/before the startDate and has been deleted
                     users = db.Users.Where(u => u.Created <= startDate && (u.Deleted == null || u.Deleted > startDate)).ToList();
-                    if (users == null)
+                    rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted == null || r.Deleted > startDate)).ToList();
+                    if (users == null || rooms == null)
                     {
-                        return NotFound("No users found with the passed search critiea.");
+                        return NotFound("No users/rooms found with the passed search critiea.");
                     }
 
                     return Ok(users.Count);
@@ -95,13 +100,13 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
-        /// This endpoint will return all Users to the caller using the search critiea of startdate and enddate.
+        /// This endpoint will return the total count of Users and Rooms to the caller using the search critiea of startdate and enddate.
         /// </summary>
         /// <remarks>
         /// The format for startDate and endDate is yyyy-mm-dd
         /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database with the match search critiea.
+        /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
         // GET: api/forecast/Users/startDate/endDate
         [HttpGet("Users/{startDate:datetime}/{endDate:datetime}")]
@@ -116,14 +121,16 @@ namespace MockProject3.Api.Controllers
                 }
 
                 List<User> users = new List<User>();
+                List<Room> rooms = new List<Room>();
 
                 using (ForecastContext db = new ForecastContext())
                 {
                     // Find all users that were created within the range of startDate and endDate that aren't deleted
                     users = db.Users.Where(u => u.Created <= startDate && (u.Deleted > endDate || u.Deleted == null)).ToList();
-                    if (users == null)
+                    rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted > endDate || r.Deleted == null)).ToList();
+                    if (users == null || rooms == null)
                     {
-                        return NotFound("No users found with the passed search critiea."); 
+                        return NotFound("No users/rooms found with the passed search critiea."); 
                     }
 
                     return Ok(users.Count);
@@ -137,13 +144,13 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
-        /// This endpoint will return all Users to the caller using the search critiea of startdate, enddate, and office location.
+        /// This endpoint will return the total count of Users and Rooms to the caller using the search critiea of startdate, enddate, and office location.
         /// </summary>
         /// <remarks>
         /// The format for startDate and endDate is yyyy-mm-dd and the format of location is city name
         /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database with the match search critiea.
+        /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
         // GET: api/forecast/Users/startDate/endDate/location
         [HttpGet("Users/{startDate:datetime}/{endDate:datetime}/{location:alpha}")]
@@ -158,14 +165,16 @@ namespace MockProject3.Api.Controllers
                 }
 
                 List<User> users = new List<User>();
+                List<Room> rooms = new List<Room>();
 
                 using (ForecastContext db = new ForecastContext())
                 {
                     // Find all users that were created within the range of startDate and endDate that aren't deleted
                     users = db.Users.Where(u => u.Created <= startDate && (u.Deleted > endDate || u.Deleted == null) && u.Location == location).ToList();
-                    if (users == null)
+                    rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted > endDate || r.Deleted == null) && r.Location == location).ToList();
+                    if (users == null || rooms == null)
                     {
-                        return NotFound("No users found with the passed search critiea.");
+                        return NotFound("No users/rooms found with the passed search critiea.");
                     }
 
                     return Ok(users.Count);
