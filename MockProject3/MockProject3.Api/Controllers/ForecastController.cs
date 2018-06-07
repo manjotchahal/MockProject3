@@ -63,7 +63,7 @@ namespace MockProject3.Api.Controllers
         {
             try
             {
-                // if the model are correct?
+                // check if the models are correct?
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Not valid input");
