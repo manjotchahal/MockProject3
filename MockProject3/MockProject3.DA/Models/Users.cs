@@ -37,6 +37,10 @@ namespace MockProject3.DA.Models
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
 
+        public Guid BatchId { get; set; }
+        [ForeignKey("BatchId")]
+        public virtual Batch Batch { get; set; }
+
         [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
 
