@@ -11,9 +11,10 @@ using System;
 namespace MockProject3.DA.Migrations
 {
     [DbContext(typeof(ForecastContext))]
-    partial class ForecastContextModelSnapshot : ModelSnapshot
+    [Migration("20180607133115_taketwo")]
+    partial class taketwo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,15 +61,6 @@ namespace MockProject3.DA.Migrations
 
                     b.Property<int>("Capacity");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDeleted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(MAX)");
@@ -94,15 +86,6 @@ namespace MockProject3.DA.Migrations
                         .HasMaxLength(200);
 
                     b.Property<int>("BatchID");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDeleted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
