@@ -31,7 +31,7 @@ namespace MockProject3.DA.Models
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
         [Required]
-        public char Gender { get; set; }
+        public string Gender { get; set; }
 
         [Required]
         public Address Address { get; set; }
