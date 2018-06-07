@@ -36,7 +36,7 @@ namespace MockProject3.DA.Models
         public int Occupancy { get; set; }
 
         [DataType(DataType.Text)]
-        [Column(TypeName = "nvarchar(MAX)")]        
+        [Column(TypeName = "nvarchar(1)")]        
         [Required]
         public string Gender { get; set; }
 
