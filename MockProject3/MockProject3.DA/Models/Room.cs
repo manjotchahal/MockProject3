@@ -35,7 +35,11 @@ namespace MockProject3.DA.Models
         
         public virtual ICollection<User> Users { get; set; }
 
-        DateTime Created { get; set; }
-        DateTime Modified { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime Created { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime Modified { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime Deleted { get; set; }
     }
 }
