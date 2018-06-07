@@ -13,7 +13,7 @@ namespace MockProject3.DA.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }
-        
+
         [Required]
         public Guid UserId { get; set; }
 
@@ -32,10 +32,12 @@ namespace MockProject3.DA.Models
         [DataType(DataType.EmailAddress)]
         [Column(TypeName = "nvarchar(MAX)")]
         public string Email { get; set; }
-        
+
         [Required]
-        public char Gender { get; set; }
-        
+        [DataType(DataType.Text)]
+        [Column(TypeName = "nvarchar(1)")]
+        public string Gender { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
