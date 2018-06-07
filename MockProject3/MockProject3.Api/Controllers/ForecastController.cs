@@ -50,5 +50,43 @@ namespace MockProject3.Api.Controllers
                 return BadRequest("Error occurred while processing request."); // Return an empty list
             }
         }
+
+        /// <summary>
+        /// This endpoint will return all Users to the caller using the search critiea of startdate and enddate.
+        /// </summary>
+        /// <return>
+        /// Return a list of all Users in the database.
+        /// </return>
+        [Route("~api/Forecast/Users")]
+        [HttpGet]
+        public IActionResult Get([FromBody]DateTime startDate, [FromBody]DateTime endDate)
+        {
+            try
+            {
+                // if the model are correct?
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Not valid input");
+                }
+
+                List<User> users = new List<User>();
+
+                using (ForecastContext db = new ForecastContext())
+                {
+                    users = db.Users.Where(u => u.StartDate == startDate && u.EndDate == endDate).ToList();
+                    if (users == null)
+                    {
+                        return NotFound("No users found with the passed search critiea."); 
+                    }
+
+                    return Ok(users);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
     }
 }
