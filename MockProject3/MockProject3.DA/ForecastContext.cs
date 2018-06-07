@@ -14,38 +14,34 @@ namespace MockProject3.DA
 {
     public class ForecastContext: DbContext
     {
-        public static void Main(string[] args)
+        //public static void Main(string[] args)
+        //{
+        //    Console.WriteLine("Creating db");
+        //    ForecastContext db = new ForecastContext();
+        //    db.SaveChanges();
+        //}
+
+        public ForecastContext()
         {
-            //Console.WriteLine("Creating db");
-            //ForecastContext db = new ForecastContext(GetOptions("ForecastDB"));
-            //db.SaveChanges();
         }
 
-
-        //connection string
-        //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
-
-
-        public ForecastContext(DbContextOptions/*<ForecastContext>*/ options) : base(options)
+        public ForecastContext(DbContextOptions<ForecastContext> options)
+            : base(options)
         {
-
         }
 
-        private static DbContextOptions/*<ForecastContext>*/ GetOptions(string connectionString)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Database=ForecastDB;Trusted_Connection=False;User=sqladmin;password=password123");
+            }
         }
-
-
 
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Batch> Batches { get; set; }
-
-        //IDbSet<TEntity> IDbContext.Set<TEntity>()
-        //{
-        //    return base.Set<TEntity>();
-        //}
 
         public override int SaveChanges()
         {
