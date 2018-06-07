@@ -12,9 +12,9 @@ using MockProject3.DA;
 using NLog;
 
 namespace MockProject3.Api.Controllers
-{ 
+{
     [Produces("application/json")]
-    [Route("api/Forecast")]
+    [Route("api/[controller]")]
     public class ForecastController : Controller
     {
         // Logger object to log errors to a file.
@@ -26,7 +26,8 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        [Route("~api/Forecast/Users")]
+        // GET: api/forecast/Users
+        [Route("Users")]
         [HttpGet]
         public IActionResult Get() // .NET Core doesn't have IHttpActionResult instead we use IActionResult
         {
@@ -39,10 +40,10 @@ namespace MockProject3.Api.Controllers
                     users = db.Users.ToList();
                     if (users == null)
                     {
-                        return BadRequest("There are no users in the database.");
+                        return NotFound("There are no users in the database.");
                     }
                 }
-                    return Ok(users);
+                return Ok(users);
             }
             catch (Exception ex)
             {
@@ -54,12 +55,15 @@ namespace MockProject3.Api.Controllers
         /// <summary>
         /// This endpoint will return all Users to the caller using the search critiea of startdate.
         /// </summary>
+        /// <remarks>
+        /// The format for startDate is yyyy-mm-dd
+        /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database.
+        /// Return a list of all Users in the database with the match search critiea.
         /// </return>
-        [Route("~api/Forecast/Users")]
-        [HttpGet]
-        public IActionResult Get([FromBody]DateTime startDate)
+        // GET: api/forecast/Users/startDate
+        [HttpGet("Users/{startDate:datetime}")]
+        public IActionResult Get(DateTime startDate)
         {
             try
             {
@@ -92,12 +96,15 @@ namespace MockProject3.Api.Controllers
         /// <summary>
         /// This endpoint will return all Users to the caller using the search critiea of startdate and enddate.
         /// </summary>
+        /// <remarks>
+        /// The format for startDate and endDate is yyyy-mm-dd
+        /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database.
+        /// Return a list of all Users in the database with the match search critiea.
         /// </return>
-        [Route("~api/Forecast/Users")]
-        [HttpGet]
-        public IActionResult Get([FromBody]DateTime startDate, [FromBody]DateTime endDate)
+        // GET: api/forecast/Users/startDate/endDate
+        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}")]
+        public IActionResult Get(DateTime startDate, DateTime endDate)
         {
             try
             {
@@ -115,6 +122,47 @@ namespace MockProject3.Api.Controllers
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea."); 
+                    }
+
+                    return Ok(users);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
+
+        /// <summary>
+        /// This endpoint will return all Users to the caller using the search critiea of startdate, enddate, and office location.
+        /// </summary>
+        /// <remarks>
+        /// The format for startDate and endDate is yyyy-mm-dd and the format of location is city name
+        /// </remarks>
+        /// <return>
+        /// Return a list of all Users in the database with the match search critiea.
+        /// </return>
+        // GET: api/forecast/Users/startDate/endDate/location
+        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}/{location:alpha}")]
+        public IActionResult Get(DateTime startDate, DateTime endDate, string location)
+        {
+            try
+            {
+                // check if the models are correct?
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Not valid input");
+                }
+
+                List<User> users = new List<User>();
+
+                using (ForecastContext db = new ForecastContext())
+                {
+                    users = db.Users.Where(u => u.Created <= startDate && u.Deleted <= endDate && u.Location == location).ToList();
+                    if (users == null)
+                    {
+                        return NotFound("No users found with the passed search critiea.");
                     }
 
                     return Ok(users);
