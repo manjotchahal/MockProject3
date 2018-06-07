@@ -59,7 +59,7 @@ namespace MockProject3.Api.Controllers
         /// The format for startDate is yyyy-mm-dd
         /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database.
+        /// Return a list of all Users in the database with the match search critiea.
         /// </return>
         // GET: api/forecast/Users/startDate
         [HttpGet("Users/{startDate:datetime}")]
@@ -100,10 +100,10 @@ namespace MockProject3.Api.Controllers
         /// The format for startDate and endDate is yyyy-mm-dd
         /// </remarks>
         /// <return>
-        /// Return a list of all Users in the database.
+        /// Return a list of all Users in the database with the match search critiea.
         /// </return>
-        // GET: api/forecast/Users/startDate,endDate
-        [HttpGet("Users/{startDate:datetime},{endDate:datetime}")]
+        // GET: api/forecast/Users/startDate/endDate
+        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}")]
         public IActionResult Get(DateTime startDate, DateTime endDate)
         {
             try
@@ -122,6 +122,47 @@ namespace MockProject3.Api.Controllers
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea."); 
+                    }
+
+                    return Ok(users);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
+
+        /// <summary>
+        /// This endpoint will return all Users to the caller using the search critiea of startdate, enddate, and office location.
+        /// </summary>
+        /// <remarks>
+        /// The format for startDate and endDate is yyyy-mm-dd and the format of location is city name
+        /// </remarks>
+        /// <return>
+        /// Return a list of all Users in the database with the match search critiea.
+        /// </return>
+        // GET: api/forecast/Users/startDate/endDate/location
+        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}/{location:string}")]
+        public IActionResult Get(DateTime startDate, DateTime endDate, string location)
+        {
+            try
+            {
+                // check if the models are correct?
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Not valid input");
+                }
+
+                List<User> users = new List<User>();
+
+                using (ForecastContext db = new ForecastContext())
+                {
+                    users = db.Users.Where(u => u.DateCreated <= startDate && u.DateDeleted <= endDate && u.Location == location).ToList();
+                    if (users == null)
+                    {
+                        return NotFound("No users found with the passed search critiea.");
                     }
 
                     return Ok(users);
