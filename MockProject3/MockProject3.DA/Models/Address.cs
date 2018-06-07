@@ -9,6 +9,7 @@ namespace MockProject3.DA.Models
         public class Address
         {
             [Key]
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public Guid Id { get; set; }
             public Guid AddressId { get; set; }
             [DataType(DataType.Text)]
