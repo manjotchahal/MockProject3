@@ -14,7 +14,7 @@ using NLog;
 namespace MockProject3.Api.Controllers
 { 
     [Produces("application/json")]
-    [Route("api/Forecast")]
+    [Route("api/[controller]")]
     public class ForecastController : Controller
     {
         // Logger object to log errors to a file.
@@ -26,7 +26,7 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        [Route("~api/Forecast/Users")]
+        [Route("Users")]
         [HttpGet]
         public IActionResult Get() // .NET Core doesn't have IHttpActionResult instead we use IActionResult
         {
@@ -57,7 +57,7 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        [Route("~api/Forecast/Users")]
+        [Route("Users")]
         [HttpGet]
         public IActionResult Get([FromBody]DateTime startDate)
         {
@@ -95,7 +95,7 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        [Route("~api/Forecast/Users")]
+        [Route("Users")]
         [HttpGet]
         public IActionResult Get([FromBody]DateTime startDate, [FromBody]DateTime endDate)
         {
