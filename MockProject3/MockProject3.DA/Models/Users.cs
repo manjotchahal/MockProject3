@@ -17,7 +17,7 @@ namespace MockProject3.DA.Models
         public Guid UserId { get; set; }
 
         public Guid NameId { get; set; }
-        [ForeignKey("nameId")]
+        [ForeignKey("NameId")]
         public virtual Name Name { get; set; }
 
         [Required]
@@ -34,7 +34,7 @@ namespace MockProject3.DA.Models
         public string Location { get; set; }
 
         public Guid AddressId { get; set; }
-        [ForeignKey("addressId")]
+        [ForeignKey("AddressId")]
         public Address Address { get; set; }
 
         [Column(TypeName = "datetime2")]
