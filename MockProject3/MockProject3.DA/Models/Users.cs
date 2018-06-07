@@ -13,40 +13,46 @@ namespace MockProject3.DA.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }
-
+        
+        [Required]
         public Guid UserId { get; set; }
 
-        public Guid NameId { get; set; }
-        [ForeignKey("NameId")]
-        public virtual Name Name { get; set; }
+        [Required]
+        public Name Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Column(TypeName = "nvarchar(MAX)")]
+        public string Location { get; set; }
+
+        public Room Room { get; set; }
+        public Address Address { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         [Column(TypeName = "nvarchar(MAX)")]
         public string Email { get; set; }
-
+        
+        [Required]
+        public char Gender { get; set; }
+        
+        [Required]
         [DataType(DataType.Text)]
-        [Column(TypeName = "nvarchar(15)")]
-        public string Gender { get; set; }
-
+        [Column(TypeName = "nvarchar(MAX)")]
         public string Type { get; set; }
 
-        public string Location { get; set; }
+        [Required]
+        public Batch Batch { get; set; }
 
-        public Guid AddressId { get; set; }
-        [ForeignKey("AddressId")]
-        public virtual Address Address { get; set; }
-
-        public Guid BatchId { get; set; }
-        [ForeignKey("BatchId")]
-        public virtual Batch Batch { get; set; }
-
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
 
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
 
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "datetime2")]
         public DateTime Deleted { get; set; }
     }
