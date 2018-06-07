@@ -41,5 +41,9 @@ namespace MockProject3.DA.Models
             [Required]
             [StringLength(2, MinimumLength=2)]
             public string Country { get; set; }
+
+            public ICollection<Batch> Batches { get; set; }
+            public ICollection<User> Users { get; set; }
+            public ICollection<Room> Rooms { get; set; }
         }
 }
