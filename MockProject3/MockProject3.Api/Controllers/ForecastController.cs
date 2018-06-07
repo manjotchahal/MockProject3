@@ -144,7 +144,7 @@ namespace MockProject3.Api.Controllers
         /// Return a list of all Users in the database with the match search critiea.
         /// </return>
         // GET: api/forecast/Users/startDate/endDate/location
-        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}/{location:string}")]
+        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}/{location}")]
         public IActionResult Get(DateTime startDate, DateTime endDate, string location)
         {
             try
