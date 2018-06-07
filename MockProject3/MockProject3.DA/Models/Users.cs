@@ -12,48 +12,38 @@ namespace MockProject3.DA.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
-        public int UserID { get; set; }
+        public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
-        [DataType(DataType.Text)]
-        [Column(TypeName = "nvarchar(MAX)")]
-        [StringLength(100, ErrorMessage = "Name cannot be more than 100 characters")]
-        public string Name { get; set; }
+        public Guid userId { get; set; }
 
-        [Required(ErrorMessage = "Address is required")]
-        [DataType(DataType.Text)]
-        [Column(TypeName = "nvarchar(MAX)")]
-        [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
-        public string Address { get; set; }
-
-        [Required(ErrorMessage = "Phone number is required")]
-        [RegularExpression("[(]{1}[0-9]{3}[)]{1}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}", ErrorMessage = "Format must be (###) ###-####")]
-        [DataType(DataType.PhoneNumber)]
-        [Column(TypeName = "nvarchar(MAX)")]
-        public string PhoneNumber { get; set; }
+        public Guid nameId { get; set; }
+        [ForeignKey("nameId")]
+        public virtual Name Name { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         [Column(TypeName = "nvarchar(MAX)")]
-        [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}", ErrorMessage = "Email is too long, max 200 character on each side of @")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
-        [Required(ErrorMessage = "Gender is required")]
         [DataType(DataType.Text)]
-        [Column(TypeName = "nvarchar(MAX)")]
-        public string Gender { get; set; }
+        [Column(TypeName = "nvarchar(15)")]
+        public string gender { get; set; }
+
+        public string type { get; set; }
+
+        public string location { get; set; }
+
+        public Guid addressId { get; set; }
+        [ForeignKey("addressId")]
+        public Address Address { get; set; }
 
         DateTime Created { get; set; }
+        
         DateTime Modified { get; set; }
 
-        public int? RoomID { get; set; }
-        [ForeignKey("RoomID")]
-        public virtual Room Room { get; set; }
+        public DateTime Added { get; set; }
 
-        [Required]
-        public int BatchID { get; set; }
-        [ForeignKey("BatchID")]
-        public virtual Batch Batch { get; set; }
+        public DateTime Removed { get; set; }
     }
 
 }
