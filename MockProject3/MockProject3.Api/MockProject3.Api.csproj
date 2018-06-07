@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MockProject3.DAL\MockProject3.DAL.csproj" />
     <ProjectReference Include="..\MockProject3.DA\MockProject3.DA.csproj" />
   </ItemGroup>
 

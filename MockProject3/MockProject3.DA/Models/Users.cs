@@ -26,6 +26,12 @@ namespace MockProject3.DA.Models
         [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
         public string Address { get; set; }
 
+        [Required(ErrorMessage = "Location is required")]
+        [DataType(DataType.Text)]
+        [Column(TypeName = "nvarchar(MAX)")]
+        [StringLength(200, ErrorMessage = "Location cannot be more than 200 characters")]
+        public string Location { get; set; }
+
         [Required(ErrorMessage = "Phone number is required")]
         [RegularExpression("[(]{1}[0-9]{3}[)]{1}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}", ErrorMessage = "Format must be (###) ###-####")]
         [DataType(DataType.PhoneNumber)]
@@ -43,8 +49,14 @@ namespace MockProject3.DA.Models
         [Column(TypeName = "nvarchar(MAX)")]
         public string Gender { get; set; }
 
-        DateTime Created { get; set; }
-        DateTime Modified { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime DateCreated { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime DateModified { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime DateDeleted { get; set; }
 
         public int? RoomId { get; set; }
         [ForeignKey("RoomId")]
