@@ -35,7 +35,7 @@ namespace MockProject3.DA
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDB2;User ID=sqladmin;Password=password123");
+                optionsBuilder.UseSqlServer("Server=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Database=ForecastDB;Trusted_Connection=False;User=sqladmin;password=password123");
             }
         }
 

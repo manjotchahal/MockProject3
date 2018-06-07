@@ -11,9 +11,10 @@ using System;
 namespace MockProject3.DA.Migrations
 {
     [DbContext(typeof(ForecastContext))]
-    partial class ForecastContextModelSnapshot : ModelSnapshot
+    [Migration("20180607175236_pedro-update")]
+    partial class pedroupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
