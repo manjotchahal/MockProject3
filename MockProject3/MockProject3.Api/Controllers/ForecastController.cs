@@ -78,7 +78,7 @@ namespace MockProject3.Api.Controllers
                 using (ForecastContext db = new ForecastContext())
                 {
                     // Get all users that were created on/before the startDate and has been deleted
-                    users = db.Users.Where(u => u.Created <= startDate && u.Deleted != null).ToList();
+                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted != null || u.Deleted > startDate)).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea.");
