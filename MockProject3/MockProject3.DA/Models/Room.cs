@@ -12,7 +12,7 @@ namespace MockProject3.DA.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        
+
         // Id we get from service hub
         [Required]
         public Guid RoomId { get; set; }
@@ -43,7 +43,6 @@ namespace MockProject3.DA.Models
         [Column(TypeName = "datetime2")]
         public DateTime Deleted { get; set; }
 
-       
         public ICollection<User> Users { get; set; }
     }
 }
