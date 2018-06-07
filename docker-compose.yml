@@ -1,0 +1,38 @@
+# mvc service is visible at http://mvc WITHIN the stack
+# api service is visible at http://api:4200 WITHIN the stack
+
+version: "3"
+services:
+  api:
+    image: docker-api
+    networks:
+      - net
+    deploy:
+      replicas: 1
+      # restart-policy:
+      #   condition: on-failure
+      #   delay: 2s
+      #   max_attempts: 3
+    ports:
+      - "9000:80"
+    # environment:
+      # ApiServiceUrl: "http://api:4200"
+  da:
+    image: docker-da
+    ports:
+      - "9200:4200"
+    networks:
+      - net
+    environment:
+      ASPNETCORE_URLS: "http://*:4200" # host api at port 4200 within the stack
+  dal:
+    image: docker-dal
+    ports:
+      - "9300:4300"
+    networks:
+      - net
+    environment:
+      ASPNETCORE_URLS: "http://*:4300" # host api at port 4200 within the stack
+
+networks:
+  net:
