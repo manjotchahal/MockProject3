@@ -26,6 +26,7 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
+        // GET: api/forecast/Users
         [Route("Users")]
         [HttpGet]
         public IActionResult Get() // .NET Core doesn't have IHttpActionResult instead we use IActionResult
@@ -54,10 +55,13 @@ namespace MockProject3.Api.Controllers
         /// <summary>
         /// This endpoint will return all Users to the caller using the search critiea of startdate.
         /// </summary>
+        /// <remarks>
+        /// The format for startDate is yyyy-mm-dd
+        /// </remarks>
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        //[Route("Users")]
+        // GET: api/forecast/Users/startDate
         [HttpGet("Users/{startDate:datetime}")]
         public IActionResult Get(DateTime startDate)
         {
@@ -92,10 +96,13 @@ namespace MockProject3.Api.Controllers
         /// <summary>
         /// This endpoint will return all Users to the caller using the search critiea of startdate and enddate.
         /// </summary>
+        /// <remarks>
+        /// The format for startDate and endDate is yyyy-mm-dd
+        /// </remarks>
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        //[Route("Users")]
+        // GET: api/forecast/Users/startDate,endDate
         [HttpGet("Users/{startDate:datetime},{endDate:datetime}")]
         public IActionResult Get(DateTime startDate, DateTime endDate)
         {
