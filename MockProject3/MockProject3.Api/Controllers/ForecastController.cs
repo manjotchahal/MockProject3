@@ -46,7 +46,16 @@ namespace MockProject3.Api.Controllers
                         return NotFound("There are no users/rooms in the database.");
                     }
                 }
-                return Ok(users.Count);
+
+                // Return the snapshot
+                var snapshot = new Snapshot()
+                {
+                    Date = DateTime.MinValue,
+                    UserCount = users.Count,
+                    RoomCount = rooms.Count,
+                    Location = "ALL"
+                };
+                return Ok(snapshot);
             }
             catch (Exception ex)
             {
@@ -89,7 +98,15 @@ namespace MockProject3.Api.Controllers
                         return NotFound("No users/rooms found with the passed search critiea.");
                     }
 
-                    return Ok(users.Count);
+                    // Return the snapshot
+                    var snapshot = new Snapshot()
+                    {
+                        Date = startDate,
+                        UserCount = users.Count,
+                        RoomCount = rooms.Count,
+                        Location = "ALL"
+                    };
+                    return Ok(snapshot);
                 }
             }
             catch (Exception ex)
@@ -133,7 +150,15 @@ namespace MockProject3.Api.Controllers
                         return NotFound("No users/rooms found with the passed search critiea."); 
                     }
 
-                    return Ok(users.Count);
+                    // Return the snapshot
+                    var snapshot = new Snapshot()
+                    {
+                        Date = startDate,
+                        UserCount = users.Count,
+                        RoomCount = rooms.Count,
+                        Location = "ALL"
+                    };
+                    return Ok(snapshot);
                 }
             }
             catch (Exception ex)
@@ -177,7 +202,15 @@ namespace MockProject3.Api.Controllers
                         return NotFound("No users/rooms found with the passed search critiea.");
                     }
 
-                    return Ok(users.Count);
+                    // Return the snapshot
+                    var snapshot = new Snapshot()
+                    {
+                        Date = startDate,
+                        UserCount = users.Count,
+                        RoomCount = rooms.Count,
+                        Location = location
+                    };
+                    return Ok(snapshot);
                 }
             }
             catch (Exception ex)
