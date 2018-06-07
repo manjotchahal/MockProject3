@@ -12,7 +12,7 @@ using MockProject3.DA;
 using NLog;
 
 namespace MockProject3.Api.Controllers
-{ 
+{
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class ForecastController : Controller
@@ -39,10 +39,10 @@ namespace MockProject3.Api.Controllers
                     users = db.Users.ToList();
                     if (users == null)
                     {
-                        return BadRequest("There are no users in the database.");
+                        return NotFound("There are no users in the database.");
                     }
                 }
-                    return Ok(users);
+                return Ok(users);
             }
             catch (Exception ex)
             {
@@ -57,9 +57,9 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        [Route("Users")]
-        [HttpGet]
-        public IActionResult Get([FromBody]DateTime startDate)
+        //[Route("Users")]
+        [HttpGet("Users/{startDate:datetime}")]
+        public IActionResult Get(DateTime startDate)
         {
             try
             {
@@ -95,9 +95,9 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return a list of all Users in the database.
         /// </return>
-        [Route("Users")]
-        [HttpGet]
-        public IActionResult Get([FromBody]DateTime startDate, [FromBody]DateTime endDate)
+        //[Route("Users")]
+        [HttpGet("Users/{startDate:datetime},{endDate:datetime}")]
+        public IActionResult Get(DateTime startDate, DateTime endDate)
         {
             try
             {
