@@ -11,22 +11,30 @@ namespace MockProject3.DA.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RoomID { get; set; }
+        public Guid Id { get; set; }
+        
+        // Id we get from service hub
+        public Guid RoomId { get; set; }
 
-        [Required(ErrorMessage = "Capacity is required.")]
-        public int Capacity { get; set; }
-
-        [Required(ErrorMessage = "Address is required")]
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
-        public string Address { get; set; }
+        public string Location { get; set; }
 
-        [Required(ErrorMessage = "Gender is required")]
+        [ForeignKey("AddressId")]
+        public Guid AddressId { get; set; }
+        public virtual Address Address { get; set; }
+
+        public int Vacancy { get; set; }
+
+        public int Occupancy { get; set; }
+
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        public string Gender { get; set; }
-
+        public char Gender { get; set; }
+        
         public virtual ICollection<User> Users { get; set; }
+
+        DateTime Created { get; set; }
+        DateTime Modified { get; set; }
     }
 }
