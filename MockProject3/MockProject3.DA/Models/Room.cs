@@ -11,7 +11,10 @@ namespace MockProject3.DA.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RoomID { get; set; }
+        public Guid Id { get; set; }
+        
+        // Id we get from service hub
+        public Guid RoomId { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime DateCreated { get; set; }
@@ -22,26 +25,24 @@ namespace MockProject3.DA.Models
         [Column(TypeName = "datetime2")]
         public DateTime DateDeleted { get; set; }
 
-        [Required(ErrorMessage = "Capacity is required.")]
         public int Capacity { get; set; }
 
-        [Required(ErrorMessage = "Address is required")]
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters")]
-        public string Address { get; set; }
-
-        [Required(ErrorMessage = "Location is required")]
-        [DataType(DataType.Text)]
-        [Column(TypeName = "nvarchar(MAX)")]
-        [StringLength(200, ErrorMessage = "Location cannot be more than 200 characters")]
         public string Location { get; set; }
 
-        [Required(ErrorMessage = "Gender is required")]
+        public Guid AddressId { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
+
+        public int Vacancy { get; set; }
+
+        public int Occupancy { get; set; }
+
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        public string Gender { get; set; }
-
+        public char Gender { get; set; }
+        
         public virtual ICollection<User> Users { get; set; }
     }
 }
