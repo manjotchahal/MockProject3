@@ -21,21 +21,6 @@ namespace MockProject3.DA
         //    db.SaveChanges();
         //}
 
-
-        //connection string
-        //    <add name="ForecastDb" connectionString="Data Source=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Initial Catalog=ForecastDb;Persist Security Info=True;User ID=sqladmin;Password=password123" providerName="System.Data.SqlClient" />
-
-
-        //public ForecastContext(DbContextOptions/*<ForecastContext>*/ options) : base(options)
-        //{
-
-        //}
-
-        //private static DbContextOptions/*<ForecastContext>*/ GetOptions(string connectionString)
-        //{
-        //    return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
-        //}
-
         public ForecastContext()
         {
         }
@@ -54,15 +39,9 @@ namespace MockProject3.DA
             }
         }
 
-
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Batch> Batches { get; set; }
-
-        //IDbSet<TEntity> IDbContext.Set<TEntity>()
-        //{
-        //    return base.Set<TEntity>();
-        //}
 
         public override int SaveChanges()
         {

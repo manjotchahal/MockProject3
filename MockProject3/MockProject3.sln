@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockProject3.Api", "MockPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockProject3.DA", "MockProject3.DA\MockProject3.DA.csproj", "{730E2246-0D7D-4E73-A0A4-1C081884A5EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockProject3.DAL", "MockProject3.DAL\MockProject3.DAL.csproj", "{2C8A259C-6D2C-4894-A95B-241C31A155AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockProject3.DAL", "MockProject3.DAL\MockProject3.DAL.csproj", "{2C8A259C-6D2C-4894-A95B-241C31A155AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

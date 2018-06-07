@@ -37,13 +37,14 @@ namespace MockProject3.DA.Models
         [ForeignKey("addressId")]
         public Address Address { get; set; }
 
-        DateTime Created { get; set; }
-        
-        DateTime Modified { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime DateCreated { get; set; }
 
-        public DateTime Added { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime DateModified { get; set; }
 
-        public DateTime Removed { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime DateDeleted { get; set; }
     }
 
 }
