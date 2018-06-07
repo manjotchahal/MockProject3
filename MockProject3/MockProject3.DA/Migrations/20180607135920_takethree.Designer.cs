@@ -11,8 +11,8 @@ using System;
 namespace MockProject3.DA.Migrations
 {
     [DbContext(typeof(ForecastContext))]
-    [Migration("20180605225544_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180607135920_takethree")]
+    partial class takethree
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,11 @@ namespace MockProject3.DA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(MAX)");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(MAX)")
+                        .HasMaxLength(200);
+
                     b.HasKey("RoomID");
 
                     b.ToTable("Rooms");
@@ -89,6 +94,11 @@ namespace MockProject3.DA.Migrations
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(MAX)")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Name")
                         .IsRequired()
