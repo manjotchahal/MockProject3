@@ -12,7 +12,7 @@ namespace MockProject3.DA.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [DataType(DataType.Text)]
@@ -46,13 +46,13 @@ namespace MockProject3.DA.Models
         DateTime Created { get; set; }
         DateTime Modified { get; set; }
 
-        public int? RoomID { get; set; }
-        [ForeignKey("RoomID")]
+        public int? RoomId { get; set; }
+        [ForeignKey("RoomId")]
         public virtual Room Room { get; set; }
 
         [Required]
-        public int BatchID { get; set; }
-        [ForeignKey("BatchID")]
+        public int BatchId { get; set; }
+        [ForeignKey("BatchId")]
         public virtual Batch Batch { get; set; }
     }
 
