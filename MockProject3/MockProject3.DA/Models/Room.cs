@@ -20,8 +20,9 @@ namespace MockProject3.DA.Models
         [Column(TypeName = "nvarchar(MAX)")]
         public string Location { get; set; }
 
-        [ForeignKey("AddressId")]
+        
         public Guid AddressId { get; set; }
+        [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
 
         public int Vacancy { get; set; }
