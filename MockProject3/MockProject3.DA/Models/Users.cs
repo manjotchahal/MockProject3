@@ -38,13 +38,13 @@ namespace MockProject3.DA.Models
         public Address Address { get; set; }
 
         [Column(TypeName = "datetime2")]
-        public DateTime DateCreated { get; set; }
+        public DateTime Created { get; set; }
 
         [Column(TypeName = "datetime2")]
-        public DateTime DateModified { get; set; }
+        public DateTime Modified { get; set; }
 
         [Column(TypeName = "datetime2")]
-        public DateTime DateDeleted { get; set; }
+        public DateTime Deleted { get; set; }
     }
 
 }
