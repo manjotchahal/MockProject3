@@ -24,7 +24,7 @@ namespace MockProject3.Api.Controllers
         /// This endpoint will return all Users to the caller.
         /// </summary>
         /// <return>
-        /// Return a list of all Users in the database.
+        /// Return the total count of Users in the database.
         /// </return>
         // GET: api/forecast/Users
         [Route("Users")]
@@ -43,7 +43,7 @@ namespace MockProject3.Api.Controllers
                         return NotFound("There are no users in the database.");
                     }
                 }
-                return Ok(users);
+                return Ok(users.Count);
             }
             catch (Exception ex)
             {
@@ -77,13 +77,14 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.Created <= startDate).ToList();
+                    // Get all users that were created on/before the startDate and has been deleted
+                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted == null || u.Deleted > startDate)).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea.");
                     }
 
-                    return Ok(users);
+                    return Ok(users.Count);
                 }
             }
             catch (Exception ex)
@@ -118,13 +119,14 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.Created <= startDate && u.Deleted <= endDate).ToList();
+                    // Find all users that were created within the range of startDate and endDate that aren't deleted
+                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted > endDate || u.Deleted == null)).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea."); 
                     }
 
-                    return Ok(users);
+                    return Ok(users.Count);
                 }
             }
             catch (Exception ex)
@@ -159,13 +161,14 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.Created <= startDate && u.Deleted <= endDate && u.Location == location).ToList();
+                    // Find all users that were created within the range of startDate and endDate that aren't deleted
+                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted > endDate || u.Deleted == null) && u.Location == location).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea.");
                     }
 
-                    return Ok(users);
+                    return Ok(users.Count);
                 }
             }
             catch (Exception ex)
