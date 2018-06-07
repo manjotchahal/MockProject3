@@ -52,6 +52,44 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
+        /// This endpoint will return all Users to the caller using the search critiea of startdate.
+        /// </summary>
+        /// <return>
+        /// Return a list of all Users in the database.
+        /// </return>
+        [Route("~api/Forecast/Users")]
+        [HttpGet]
+        public IActionResult Get([FromBody]DateTime startDate)
+        {
+            try
+            {
+                // check if the models are correct?
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Not valid input");
+                }
+
+                List<User> users = new List<User>();
+
+                using (ForecastContext db = new ForecastContext())
+                {
+                    users = db.Users.Where(u => u.DateCreated <= startDate).ToList();
+                    if (users == null)
+                    {
+                        return NotFound("No users found with the passed search critiea.");
+                    }
+
+                    return Ok(users);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
+
+        /// <summary>
         /// This endpoint will return all Users to the caller using the search critiea of startdate and enddate.
         /// </summary>
         /// <return>
@@ -63,7 +101,7 @@ namespace MockProject3.Api.Controllers
         {
             try
             {
-                // if the model are correct?
+                // check if the models are correct?
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Not valid input");
@@ -73,7 +111,7 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.StartDate == startDate && u.EndDate == endDate).ToList();
+                    users = db.Users.Where(u => u.DateCreated <= startDate && u.DateDeleted <= endDate).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea."); 
