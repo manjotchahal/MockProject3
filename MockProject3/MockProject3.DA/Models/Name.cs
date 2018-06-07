@@ -14,19 +14,19 @@ namespace MockProject3.DA.Models
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }
 
-        public Guid nameId { get; set; }
+        public Guid NameId { get; set; }
 
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        public string first { get; set; }
+        public string First { get; set; }
 
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        public string middle { get; set; }
+        public string Middle { get; set; }
 
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
-        public string last { get; set; }
+        public string Last { get; set; }
     }
 
 }

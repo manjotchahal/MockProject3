@@ -14,26 +14,26 @@ namespace MockProject3.DA.Models
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }
 
-        public Guid userId { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid nameId { get; set; }
+        public Guid NameId { get; set; }
         [ForeignKey("nameId")]
         public virtual Name Name { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         [Column(TypeName = "nvarchar(MAX)")]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(15)")]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
-        public string type { get; set; }
+        public string Type { get; set; }
 
-        public string location { get; set; }
+        public string Location { get; set; }
 
-        public Guid addressId { get; set; }
+        public Guid AddressId { get; set; }
         [ForeignKey("addressId")]
         public Address Address { get; set; }
 
