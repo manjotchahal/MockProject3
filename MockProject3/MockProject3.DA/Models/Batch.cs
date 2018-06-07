@@ -34,6 +34,7 @@ namespace MockProject3.DA.Models
 
         // The total of the associates in the batch
         [Range(0, 100)]
+        [Required]
         public int BatchOccupancy { get; set; }
 
         // The Technology the batch will be learning
