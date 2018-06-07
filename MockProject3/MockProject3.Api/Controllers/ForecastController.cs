@@ -73,7 +73,7 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.DateCreated <= startDate).ToList();
+                    users = db.Users.Where(u => u.Created <= startDate).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea.");
@@ -111,7 +111,7 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.DateCreated <= startDate && u.DateDeleted <= endDate).ToList();
+                    users = db.Users.Where(u => u.Created <= startDate && u.Deleted <= endDate).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea."); 
