@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" />
   </ItemGroup>
-<!--
+
   <ItemGroup>
     <Reference Include="System">
       <HintPath>System</HintPath>
@@ -24,7 +24,7 @@
       <HintPath>System.Xml</HintPath>
     </Reference>
   </ItemGroup>
--->
+
   <ItemGroup>
     <None Update="ForecastDB.xsd">
       <Generator>MSDataSetGenerator</Generator>
