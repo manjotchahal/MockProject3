@@ -159,7 +159,7 @@ namespace MockProject3.Api.Controllers
 
                 using (ForecastContext db = new ForecastContext())
                 {
-                    users = db.Users.Where(u => u.DateCreated <= startDate && u.DateDeleted <= endDate && u.Location == location).ToList();
+                    users = db.Users.Where(u => u.Created <= startDate && u.Deleted <= endDate && u.Location == location).ToList();
                     if (users == null)
                     {
                         return NotFound("No users found with the passed search critiea.");

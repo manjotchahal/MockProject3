@@ -32,9 +32,11 @@ namespace MockProject3.DA.Models
         [DataType(DataType.EmailAddress)]
         [Column(TypeName = "nvarchar(MAX)")]
         public string Email { get; set; }
-        
+
+        [DataType(DataType.Text)]
+        [Column(TypeName = "nvarchar(MAX)")]
         [Required]
-        public char Gender { get; set; }
+        public string Gender { get; set; }
         
         [Required]
         [DataType(DataType.Text)]
