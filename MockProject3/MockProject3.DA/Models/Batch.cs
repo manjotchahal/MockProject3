@@ -43,14 +43,13 @@ namespace MockProject3.DA.Models
         [Required]
         [Column(TypeName = "nvarchar(MAX)")] 
         public string BatchSkill { get; set; }
-        
+
         [Required]
         public Address Address { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
-        public DateTime Modified { get; set; }
+
         [Column(TypeName = "datetime2")]
         public DateTime Deleted { get; set; }
 
