@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
+    ///<summary>The Snapshot class is used to represent the supply and demand of Rooms and Users on any given date.</summary>
     public class Snapshot
     {
         public DateTime Date { get; set; }
