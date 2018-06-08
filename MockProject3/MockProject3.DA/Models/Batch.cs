@@ -6,41 +6,42 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
+    ///<summary>The Batch model is used to contain all of the pertinent information about a batch including start date, end date, location, type, occupancy, and location. </summary>
+    ///<remarks>Each Batch contains a collection of User objects that represents the associates that belong to a batch.
+    ///Each Batch will have a uniquely generated Guid Id as well as retain the primary key Guid of the previous database, which is stored in BatchId.</remarks>
     [Table("Batches")]
     public class Batch
     {
-        [Key] // The primary key
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Auto increment the primary key
+        [Key] 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }
 
         [Required]
         public Guid BatchId { get; set; }
 
-        // The start date of the batch
+       
         [DataType(DataType.DateTime)]
-        [Column(TypeName = "datetime2")] // The column is of datetime
+        [Column(TypeName = "datetime2")] 
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Column(TypeName = "datetime2")] // The column is of datetime
+        [Column(TypeName = "datetime2")] 
         public DateTime EndDate { get; set; }
 
-        // Name of the batch
+        
         [DataType(DataType.Text)]
         [Required]
-        [Column(TypeName ="nvarchar(MAX)")] // The column is nvarchar with MAX length possible in SQL
+        [Column(TypeName ="nvarchar(MAX)")] 
         public string BatchName { get; set; }
 
-        // The total of the associates in the batch
         [Range(0, 100)]
         [Required]
         public int BatchOccupancy { get; set; }
 
-        // The Technology the batch will be learning
         [DataType(DataType.Text)]
         [Required]
-        [Column(TypeName = "nvarchar(MAX)")] // The column is nvarchar with MAX length possible in SQL
+        [Column(TypeName = "nvarchar(MAX)")] 
         public string BatchSkill { get; set; }
 
         [Required]

@@ -6,6 +6,11 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
+    ///<summary>The Room model is used to contain all of the pertinent information about a room including location, vacancy, occupancy, room gender, and address. </summary>
+    ///<remarks>
+    ///Each Room object will have its own uniquely generated Guid Id and retain the primary key Guid that was generated for it in the previous database into RoomId.
+    ///Each Room object will have a collection of User objects that share the same Room.
+    ///</remarks>
     [Table("Rooms")]
     public class Room
     {

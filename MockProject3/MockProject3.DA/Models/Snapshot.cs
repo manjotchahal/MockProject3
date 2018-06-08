@@ -6,6 +6,8 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
+    ///<summary>The Snapshot class is used to represent the supply and demand of Rooms and Users on any given date.</summary>
+    [Table("Snapshots")]
     public class Snapshot
     {
         [Key]

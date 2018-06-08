@@ -6,6 +6,10 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
+    ///<summary>The User model is used to contain all of the pertinent information about a user including name, location, room, address, email, gender, employee type, and batch they belong to. </summary>
+    ///<remarks>    
+    ///Each User object will have its own uniquely generated Guid Id and retain the primary key Guid that was generated for it in the previous database into UserId.
+    ///</remarks>
     [Table("Users")]
     public class User 
     {
