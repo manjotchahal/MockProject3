@@ -206,6 +206,59 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
+        /// This endpoint will return the total count of Users and Rooms to the caller using the search criteria of date and office location.
+        /// </summary>
+        /// <remarks>
+        /// The format for date is yyyy-mm-dd and the format of location is city name
+        /// </remarks>
+        /// <param name="date">The date for the search.</param>
+        /// <param name="location">The location the search should be focused on.</param>
+        /// <return>
+        /// Return the total number of Users and Rooms in the database with the match search criteria.
+        /// </return>
+        // GET: api/forecast/SnapshotsByLocation/date/location
+        [HttpGet("SnapshotsByLocation/{date:datetime}/{location:alpha}")]
+        public IActionResult Get(DateTime date, string location)
+        {
+            try
+            {
+                // check if the models are correct?
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Not valid input");
+                }
+
+                List<User> users = new List<User>();
+                List<Room> rooms = new List<Room>();
+
+
+                // Find all users that were created within the range of startDate and endDate that aren't deleted
+                users = _userRepo.GetByLocation(date, location).ToList();
+                rooms = _roomRepo.GetByLocation(date, location).ToList();
+                if (users == null || rooms == null)
+                {
+                    return NotFound("No users/rooms found with the passed search critiea.");
+                }
+
+                // Return the snapshot
+                var snapshot = new Snapshot()
+                {
+                    Date = date,
+                    UserCount = users.Count,
+                    RoomCount = rooms.Count,
+                    Location = location
+                };
+                return Ok(snapshot);
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
+
+        /// <summary>
         /// This endpoint will return the total count of Users and Rooms to the caller using the search critiea of startdate, enddate, and office location.
         /// </summary>
         /// <remarks>

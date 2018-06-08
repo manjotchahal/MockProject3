@@ -30,6 +30,11 @@ namespace MockProject3.DA.Repos
             return _context.Rooms.Where(r => r.Created <= Start && (r.Deleted > End || r.Deleted == null));
         }
 
+        public IEnumerable<Room> GetByLocation(DateTime datetime, string location)
+        {
+            return _context.Rooms.Where(r => r.Created <= datetime && (r.Deleted == null || r.Deleted > datetime) && r.Location == location);
+        }
+
         public IEnumerable<Room> GetBetweenDatesAtLocation(DateTime Start, DateTime End, string location)
         {
             return _context.Rooms.Where(r => r.Created <= Start && (r.Deleted > End || r.Deleted == null) && r.Location == location);
