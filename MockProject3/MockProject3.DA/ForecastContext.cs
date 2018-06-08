@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace MockProject3.DA
 {
-    public class ForecastContext: DbContext
+    public class ForecastContext: DbContext, IForecastContext
     {
         //public static void Main(string[] args)
         //{

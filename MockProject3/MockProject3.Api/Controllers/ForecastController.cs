@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using MockProject3.DA.Models;
 using MockProject3.DA;
 using NLog;
-using MockProject3.DA.IRepos;
+using MockProject3.DA.Repos;
 
 namespace MockProject3.Api.Controllers
 {
@@ -20,9 +20,9 @@ namespace MockProject3.Api.Controllers
     {
         // Logger object to log errors to a file.
         private Logger logger = LogManager.GetCurrentClassLogger();
-        private readonly IUserRepo _userRepo;
-        private readonly IRoomRepo _roomRepo;
-        public ForecastController(IUserRepo userRepo, IRoomRepo roomRepo)
+        private readonly IRepo<User> _userRepo;
+        private readonly IRepo<Room> _roomRepo;
+        public ForecastController(IRepo<User> userRepo, IRepo<Room> roomRepo)
         {
             _userRepo = userRepo;
             _roomRepo = roomRepo;
@@ -42,7 +42,7 @@ namespace MockProject3.Api.Controllers
             try
             {
 
-                List<string> locations = _roomRepo.GetRoomLocations().ToList();
+                List<string> locations = _roomRepo.GetLocations().ToList();
                 if (locations.Count == 0)
                 {
                     return NotFound("No locations found.");
@@ -75,8 +75,8 @@ namespace MockProject3.Api.Controllers
 
 
                 // Lets query the db for the users and rooms
-                users = _userRepo.GetUsers().ToList();
-                rooms = _roomRepo.GetRooms().ToList();
+                users = _userRepo.Get().ToList();
+                rooms = _roomRepo.Get().ToList();
                 if (users == null || rooms == null)
                 {
                     return NotFound("There are no users/rooms in the database.");
@@ -127,8 +127,8 @@ namespace MockProject3.Api.Controllers
 
 
                 // Get all users that were created on/before the startDate and has been deleted
-                users = _userRepo.GetUsersByDate(startDate).ToList();
-                rooms = _roomRepo.GetRoomsByDate(startDate).ToList();
+                users = _userRepo.GetByDate(startDate).ToList();
+                rooms = _roomRepo.GetByDate(startDate).ToList();
                 if (users == null || rooms == null)
                 {
                     return NotFound("No users/rooms found with the passed search critiea.");
@@ -180,8 +180,8 @@ namespace MockProject3.Api.Controllers
 
 
                 // Find all users that were created within the range of startDate and endDate that aren't deleted
-                users = _userRepo.GetUsersBetweenDates(startDate, endDate).ToList();
-                rooms = _roomRepo.GetRoomsBetweenDates(startDate, endDate).ToList();
+                users = _userRepo.GetBetweenDates(startDate, endDate).ToList();
+                rooms = _roomRepo.GetBetweenDates(startDate, endDate).ToList();
                 if (users == null || rooms == null)
                 {
                     return NotFound("No users/rooms found with the passed search critiea.");
@@ -234,8 +234,8 @@ namespace MockProject3.Api.Controllers
 
 
                 // Find all users that were created within the range of startDate and endDate that aren't deleted
-                users = _userRepo.GetUsersBetweenDatesAtLocation(startDate, endDate, location).ToList();
-                rooms = _roomRepo.GetRoomsBetweenDatesAtLocation(startDate, endDate, location).ToList();
+                users = _userRepo.GetBetweenDatesAtLocation(startDate, endDate, location).ToList();
+                rooms = _roomRepo.GetBetweenDatesAtLocation(startDate, endDate, location).ToList();
                 if (users == null || rooms == null)
                 {
                     return NotFound("No users/rooms found with the passed search critiea.");
