@@ -18,7 +18,8 @@ namespace MockProject3.DA
     /// <remarks>
     /// A ForecastContext instance contains DbSets of Users, Rooms, Batches, Addresses, and Names.
     /// </remarks>
-    public class ForecastContext: DbContext
+    public class ForecastContext: DbContext, IForecastContext
+
     {
         /// <summary>
         /// The ForecastContext constructor is the constructor for the context.
@@ -31,11 +32,12 @@ namespace MockProject3.DA
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Room> Rooms { get; set; }
-        public DbSet<Batch> Batches { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Batch> Batches { get; set; }
         public DbSet<Name> Names { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Snapshot> Snapshots { get; set; }
+        public DbSet<User> Users { get; set; }
         
         /// <summary>
         /// Saves all changes made in this context to the database as well as update the Created and Modified fields for each set.
