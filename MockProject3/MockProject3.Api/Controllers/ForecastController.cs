@@ -99,6 +99,7 @@ namespace MockProject3.Api.Controllers
         /// <remarks>
         /// The format for startDate is yyyy-mm-dd
         /// </remarks>
+        /// <param name="startDate">The date the search should start from.</param>
         /// <return>
         /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
@@ -151,6 +152,8 @@ namespace MockProject3.Api.Controllers
         /// <remarks>
         /// The format for startDate and endDate is yyyy-mm-dd
         /// </remarks>
+        /// <param name="startDate">The starting date for the saerch.</param>
+        /// <param name="endDate">The ending date for the saerch.</param>
         /// <return>
         /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
@@ -203,6 +206,9 @@ namespace MockProject3.Api.Controllers
         /// <remarks>
         /// The format for startDate and endDate is yyyy-mm-dd and the format of location is city name
         /// </remarks>
+        /// <param name="startDate">The starting date for the saerch.</param>
+        /// <param name="endDate">The ending date for the saerch.</param>
+        /// <param name="location">The location the search should be focused on.</param>
         /// <return>
         /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
