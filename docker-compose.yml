@@ -25,14 +25,6 @@ services:
       - net
     environment:
       ASPNETCORE_URLS: "http://*:4200" # host api at port 4200 within the stack
-  dal:
-    image: docker-dal
-    ports:
-      - "9300:4300"
-    networks:
-      - net
-    environment:
-      ASPNETCORE_URLS: "http://*:4300" # host api at port 4200 within the stack
 
 networks:
   net:
