@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using MockProject3.DA.Models;
 using MockProject3.DA;
 using NLog;
+using MockProject3.DA.IRepos;
 
 namespace MockProject3.Api.Controllers
 {
@@ -19,6 +20,14 @@ namespace MockProject3.Api.Controllers
     {
         // Logger object to log errors to a file.
         private Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly IUserRepo _userRepo;
+        private readonly IRoomRepo _roomRepo;
+        public ForecastController(IUserRepo userRepo, IRoomRepo roomRepo)
+        {
+            _userRepo = userRepo;
+            _roomRepo = roomRepo;
+        }
+
 
         /// <summary>
         /// This endpoint will return the total count of Users and Rooms to the caller.
@@ -36,16 +45,15 @@ namespace MockProject3.Api.Controllers
                 List<User> users = new List<User>();
                 List<Room> rooms = new List<Room>();
 
-                using (ForecastContext db = new ForecastContext())
+
+                // Lets query the db for the users and rooms
+                users = _userRepo.GetUsers().ToList();
+                rooms = _roomRepo.GetRooms().ToList();
+                if (users == null || rooms == null)
                 {
-                    // Lets query the db for the users and rooms
-                    users = db.Users.ToList();
-                    rooms = db.Rooms.ToList();
-                    if (users == null || rooms == null)
-                    {
-                        return NotFound("There are no users/rooms in the database.");
-                    }
+                    return NotFound("There are no users/rooms in the database.");
                 }
+
 
                 // Return the snapshot
                 var snapshot = new Snapshot()
@@ -147,7 +155,7 @@ namespace MockProject3.Api.Controllers
                     rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted > endDate || r.Deleted == null)).ToList();
                     if (users == null || rooms == null)
                     {
-                        return NotFound("No users/rooms found with the passed search critiea."); 
+                        return NotFound("No users/rooms found with the passed search critiea.");
                     }
 
                     // Return the snapshot
