@@ -12,31 +12,23 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace MockProject3.DA
 {
+    /// <summary>
+    /// A ForecastContext instance represents a session with the database and is used to query and save instances of the entities.
+    /// </summary>
+    /// <remarks>
+    /// A ForecastContext instance contains DbSets of Users, Rooms, Batches, Addresses, and Names.
+    /// </remarks>
     public class ForecastContext: DbContext
     {
-        //public static void Main(string[] args)
-        //{
-        //    Console.WriteLine("Creating db");
-        //    ForecastContext db = new ForecastContext();
-        //    db.SaveChanges();
-        //}
-
-        public ForecastContext()
+        /// <summary>
+        /// The ForecastContext constructor is the constructor for the context.
+        /// </summary>
+        /// <remarks>
+        /// This constructor pulls the connection string from the appsettings.json configuration file.
+        /// </remarks>
+        /// <param name="options">Provides the options configurations for the ForecastContext, pulled from appsettings.json.</param>
+        public ForecastContext(DbContextOptions<ForecastContext> options): base(options)
         {
-        }
-
-        public ForecastContext(DbContextOptions<ForecastContext> options)
-            : base(options)
-        {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=dotnetdb.cn1ktfvmabbg.us-east-2.rds.amazonaws.com;Database=ForecastDB;Trusted_Connection=False;User=sqladmin;password=password123");
-            }
         }
 
         public DbSet<User> Users { get; set; }
@@ -44,7 +36,11 @@ namespace MockProject3.DA
         public DbSet<Batch> Batches { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Name> Names { get; set; }
-
+        
+        /// <summary>
+        /// Saves all changes made in this context to the database as well as update the Created and Modified fields for each set.
+        /// </summary>
+        /// <returns>Returns the number of state entries written to the database.</returns>
         public override int SaveChanges()
         {
             var AddedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
