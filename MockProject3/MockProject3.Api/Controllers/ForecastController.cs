@@ -21,7 +21,7 @@ namespace MockProject3.Api.Controllers
         private Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// This endpoint will return all unique and locations of rooms
+        /// This endpoint will return all unique locations of rooms
         /// </summary>
         /// <return>
         /// Return a list of all unique locations of rooms.
@@ -34,7 +34,6 @@ namespace MockProject3.Api.Controllers
             {
                 using (ForecastContext db = new ForecastContext())
                 {
-                    // Get all users that were created on/before the startDate and has been deleted
                     List<string> locations = db.Rooms.Select(r => r.Location).Where(r => r != null).Distinct().ToList();
                     if (locations.Count == 0)
                     {
