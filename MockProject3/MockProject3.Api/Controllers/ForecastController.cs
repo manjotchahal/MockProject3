@@ -217,7 +217,7 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
-        // GET: api/forecast/Users/startDate/endDate/location
+        // GET: api/forecast/SnapshotsRangeByLocation/startDate/endDate/location
         [HttpGet("SnapshotsRangeByLocation/{startDate:datetime}/{endDate:datetime}/{location:alpha}")]
         public IActionResult Get(DateTime startDate, DateTime endDate, string location)
         {
