@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MockProject3.DA.IRepos;
 using MockProject3.DA.Models;
@@ -14,11 +15,6 @@ namespace MockProject3.DA.Repos
             _context = context;
         }
 
-        public User GetUserByDate(DateTime datetime)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<User> GetUsers()
         {
             return _context.Users;
@@ -26,17 +22,17 @@ namespace MockProject3.DA.Repos
 
         public IEnumerable<User> GetUsersBetweenDates(DateTime Start, DateTime End)
         {
-            throw new NotImplementedException();
+            return _context.Users.Where(u => u.Created <= Start && (u.Deleted > End || u.Deleted == null));
         }
 
         public IEnumerable<User> GetUsersBetweenDatesAtLocation(DateTime Start, DateTime End, string location)
         {
-            throw new NotImplementedException();
+            return _context.Users.Where(u => u.Created <= Start && (u.Deleted > End || u.Deleted == null) && u.Location == location);
         }
 
         public IEnumerable<User> GetUsersByDate(DateTime datetime)
         {
-            throw new NotImplementedException();
+            return _context.Users.Where(u => u.Created <= datetime && (u.Deleted == null || u.Deleted > datetime));
         }
     }
 }

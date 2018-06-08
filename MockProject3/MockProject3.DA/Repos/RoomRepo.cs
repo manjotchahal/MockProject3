@@ -2,6 +2,7 @@
 using MockProject3.DA.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MockProject3.DA.Repos
@@ -14,9 +15,9 @@ namespace MockProject3.DA.Repos
             _context = context;
         }
 
-        public Room GetRoomByDate(DateTime datetime)
+        public IEnumerable<string> GetRoomLocations()
         {
-            throw new NotImplementedException();
+            return _context.Rooms.Select(r => r.Location).Where(r => r != null).Distinct();
         }
 
         public IEnumerable<Room> GetRooms()
@@ -26,17 +27,17 @@ namespace MockProject3.DA.Repos
 
         public IEnumerable<Room> GetRoomsBetweenDates(DateTime Start, DateTime End)
         {
-            throw new NotImplementedException();
+            return _context.Rooms.Where(r => r.Created <= Start && (r.Deleted > End || r.Deleted == null));
         }
 
         public IEnumerable<Room> GetRoomsBetweenDatesAtLocation(DateTime Start, DateTime End, string location)
         {
-            throw new NotImplementedException();
+            return _context.Rooms.Where(r => r.Created <= Start && (r.Deleted > End || r.Deleted == null) && r.Location == location);
         }
 
         public IEnumerable<Room> GetRoomsByDate(DateTime datetime)
         {
-            throw new NotImplementedException();
+            return _context.Rooms.Where(r => r.Created <= datetime && (r.Deleted == null || r.Deleted > datetime));
         }
     }
 }

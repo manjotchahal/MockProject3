@@ -6,7 +6,6 @@ namespace MockProject3.DA.IRepos
 {
     public interface IUserRepo
     {
-        User GetUserByDate(DateTime datetime);
         IEnumerable<User> GetUsers();
         IEnumerable<User> GetUsersByDate(DateTime datetime);
         IEnumerable<User> GetUsersBetweenDates(DateTime Start, DateTime End);

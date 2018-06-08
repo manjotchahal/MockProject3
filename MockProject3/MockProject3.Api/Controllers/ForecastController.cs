@@ -41,15 +41,14 @@ namespace MockProject3.Api.Controllers
         {
             try
             {
-                using (ForecastContext db = new ForecastContext())
+
+                List<string> locations = _roomRepo.GetRoomLocations().ToList();
+                if (locations.Count == 0)
                 {
-                    List<string> locations = db.Rooms.Select(r => r.Location).Where(r => r != null).Distinct().ToList();
-                    if (locations.Count == 0)
-                    {
-                        return NotFound("No locations found.");
-                    }
-                    return Ok(locations);
+                    return NotFound("No locations found.");
                 }
+                return Ok(locations);
+
             }
             catch (Exception ex)
             {
@@ -125,26 +124,25 @@ namespace MockProject3.Api.Controllers
                 List<User> users = new List<User>();
                 List<Room> rooms = new List<Room>();
 
-                using (ForecastContext db = new ForecastContext())
-                {
-                    // Get all users that were created on/before the startDate and has been deleted
-                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted == null || u.Deleted > startDate)).ToList();
-                    rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted == null || r.Deleted > startDate)).ToList();
-                    if (users == null || rooms == null)
-                    {
-                        return NotFound("No users/rooms found with the passed search critiea.");
-                    }
 
-                    // Return the snapshot
-                    var snapshot = new Snapshot()
-                    {
-                        Date = startDate,
-                        UserCount = users.Count,
-                        RoomCount = rooms.Count,
-                        Location = "ALL"
-                    };
-                    return Ok(snapshot);
+                // Get all users that were created on/before the startDate and has been deleted
+                users = _userRepo.GetUsersByDate(startDate).ToList();
+                rooms = _roomRepo.GetRoomsByDate(startDate).ToList();
+                if (users == null || rooms == null)
+                {
+                    return NotFound("No users/rooms found with the passed search critiea.");
                 }
+
+                // Return the snapshot
+                var snapshot = new Snapshot()
+                {
+                    Date = startDate,
+                    UserCount = users.Count,
+                    RoomCount = rooms.Count,
+                    Location = "ALL"
+                };
+                return Ok(snapshot);
+
             }
             catch (Exception ex)
             {
@@ -177,26 +175,25 @@ namespace MockProject3.Api.Controllers
                 List<User> users = new List<User>();
                 List<Room> rooms = new List<Room>();
 
-                using (ForecastContext db = new ForecastContext())
-                {
-                    // Find all users that were created within the range of startDate and endDate that aren't deleted
-                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted > endDate || u.Deleted == null)).ToList();
-                    rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted > endDate || r.Deleted == null)).ToList();
-                    if (users == null || rooms == null)
-                    {
-                        return NotFound("No users/rooms found with the passed search critiea.");
-                    }
 
-                    // Return the snapshot
-                    var snapshot = new Snapshot()
-                    {
-                        Date = startDate,
-                        UserCount = users.Count,
-                        RoomCount = rooms.Count,
-                        Location = "ALL"
-                    };
-                    return Ok(snapshot);
+                // Find all users that were created within the range of startDate and endDate that aren't deleted
+                users = _userRepo.GetUsersBetweenDates(startDate, endDate).ToList();
+                rooms = _roomRepo.GetRoomsBetweenDates(startDate, endDate).ToList();
+                if (users == null || rooms == null)
+                {
+                    return NotFound("No users/rooms found with the passed search critiea.");
                 }
+
+                // Return the snapshot
+                var snapshot = new Snapshot()
+                {
+                    Date = startDate,
+                    UserCount = users.Count,
+                    RoomCount = rooms.Count,
+                    Location = "ALL"
+                };
+                return Ok(snapshot);
+
             }
             catch (Exception ex)
             {
@@ -229,26 +226,25 @@ namespace MockProject3.Api.Controllers
                 List<User> users = new List<User>();
                 List<Room> rooms = new List<Room>();
 
-                using (ForecastContext db = new ForecastContext())
-                {
-                    // Find all users that were created within the range of startDate and endDate that aren't deleted
-                    users = db.Users.Where(u => u.Created <= startDate && (u.Deleted > endDate || u.Deleted == null) && u.Location == location).ToList();
-                    rooms = db.Rooms.Where(r => r.Created <= startDate && (r.Deleted > endDate || r.Deleted == null) && r.Location == location).ToList();
-                    if (users == null || rooms == null)
-                    {
-                        return NotFound("No users/rooms found with the passed search critiea.");
-                    }
 
-                    // Return the snapshot
-                    var snapshot = new Snapshot()
-                    {
-                        Date = startDate,
-                        UserCount = users.Count,
-                        RoomCount = rooms.Count,
-                        Location = location
-                    };
-                    return Ok(snapshot);
+                // Find all users that were created within the range of startDate and endDate that aren't deleted
+                users = _userRepo.GetUsersBetweenDatesAtLocation(startDate, endDate, location).ToList();
+                rooms = _roomRepo.GetRoomsBetweenDatesAtLocation(startDate, endDate, location).ToList();
+                if (users == null || rooms == null)
+                {
+                    return NotFound("No users/rooms found with the passed search critiea.");
                 }
+
+                // Return the snapshot
+                var snapshot = new Snapshot()
+                {
+                    Date = startDate,
+                    UserCount = users.Count,
+                    RoomCount = rooms.Count,
+                    Location = location
+                };
+                return Ok(snapshot);
+
             }
             catch (Exception ex)
             {

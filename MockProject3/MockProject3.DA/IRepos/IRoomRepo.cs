@@ -7,7 +7,7 @@ namespace MockProject3.DA.IRepos
 {
     public interface IRoomRepo
     {
-        Room GetRoomByDate(DateTime datetime);
+        IEnumerable<string> GetRoomLocations();
         IEnumerable<Room> GetRooms();
         IEnumerable<Room> GetRoomsByDate(DateTime datetime);
         IEnumerable<Room> GetRoomsBetweenDates(DateTime Start, DateTime End);
