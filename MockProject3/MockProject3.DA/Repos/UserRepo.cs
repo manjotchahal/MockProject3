@@ -17,7 +17,7 @@ namespace MockProject3.DA.Repos
 
         public IEnumerable<string> GetLocations()
         {
-            return _context.Rooms.Select(r => r.Location).Where(r => r != null).Distinct();
+            return _context.Users.Select(r => r.Location).Where(r => r != null).Distinct();
         }
 
         public IEnumerable<User> Get()
