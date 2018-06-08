@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MockProject3.DA;
-using MockProject3.DA.IRepos;
+using MockProject3.DA.Models;
 using MockProject3.DA.Repos;
 
 namespace MockProject3.Api
@@ -28,8 +28,8 @@ namespace MockProject3.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ForecastContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ForecastDB")));
-            services.AddTransient<IUserRepo, UserRepo>();
-            services.AddTransient<IRoomRepo, RoomRepo>();
+            services.AddTransient<IRepo<User>, UserRepo>();
+            services.AddTransient<IRepo<Room>, RoomRepo>();
             services.AddMvc();
         }
 
