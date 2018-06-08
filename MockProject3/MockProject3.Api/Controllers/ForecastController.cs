@@ -21,6 +21,35 @@ namespace MockProject3.Api.Controllers
         private Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
+        /// This endpoint will return all unique locations of rooms
+        /// </summary>
+        /// <return>
+        /// Return a list of all unique locations of rooms.
+        /// </return>
+        // GET: api/forecast/Locations
+        [HttpGet("Locations")]
+        public IActionResult GetLocations()
+        {
+            try
+            {
+                using (ForecastContext db = new ForecastContext())
+                {
+                    List<string> locations = db.Rooms.Select(r => r.Location).Where(r => r != null).Distinct().ToList();
+                    if (locations.Count == 0)
+                    {
+                        return NotFound("No locations found.");
+                    }
+                    return Ok(locations);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
+
+        /// <summary>
         /// This endpoint will return the total count of Users and Rooms to the caller.
         /// </summary>
         /// <return>

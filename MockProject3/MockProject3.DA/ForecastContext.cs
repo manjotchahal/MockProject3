@@ -42,6 +42,8 @@ namespace MockProject3.DA
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Batch> Batches { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Name> Names { get; set; }
 
         public override int SaveChanges()
         {
