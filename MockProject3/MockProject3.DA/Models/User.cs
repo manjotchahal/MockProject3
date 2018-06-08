@@ -57,6 +57,42 @@ namespace MockProject3.DA.Models
         [DataType(DataType.DateTime)]
         [Column(TypeName = "datetime2")]
         public DateTime Deleted { get; set; }
+
+        /// <summary>Default Constructor</summary>>
+        /// <remarks>Sets all properties to empty, null, or impossible values that correspond 
+        /// to invalid models that should be invalid if not replaced.</remarks>
+        public User()
+        {
+            Id = Guid.Empty;
+            UserId = Id = Guid.Empty;
+            Location = null;
+            Address = null;
+            Email = null;
+            Gender = null;
+            Type = null;
+            Batch = null;
+            Created = DateTime.MinValue;
+            Deleted = DateTime.MinValue;
+        }
+
+        /// <summary>Property validation</summary>>
+        /// <remarks>Returns true if all properties are valid
+        /// By default (through constructor), the model is invalid, properties to be filled in</remarks>
+        public bool Validate()
+        {
+            if (Id == Guid.Empty) { return false; }
+            if (UserId == Guid.Empty) { return false; }
+            if (String.IsNullOrEmpty(Location)) { return false; }
+            if (Address == null) { return false; }
+            if (String.IsNullOrEmpty(Email)) { return false; }
+            if (String.IsNullOrEmpty(Gender)) { return false; }
+            if (String.IsNullOrEmpty(Type)) { return false; }
+            if (Batch == null) { return false; }
+            if (Created == DateTime.MinValue) { return false; }
+            if (Deleted == DateTime.MinValue) { return false; }
+
+            return true;
+        }
     }
 
 }

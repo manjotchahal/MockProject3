@@ -101,18 +101,18 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
-        /// This endpoint will return the total count of Users and Rooms to the caller using the search critiea of startdate.
+        /// This endpoint will return the total count of Users and Rooms to the caller using the search criteria of date.
         /// </summary>
         /// <remarks>
-        /// The format for startDate is yyyy-mm-dd
+        /// The format for date is yyyy-mm-dd
         /// </remarks>
-        /// <param name="startDate">The date the search should start from.</param>
+        /// <param name="date">The date the search should start from.</param>
         /// <return>
-        /// Return the total number of Users and Rooms in the database with the match search critiea.
+        /// Return the total number of Users and Rooms in the database with the match search criteria.
         /// </return>
-        // GET: api/forecast/Users/startDate
-        [HttpGet("Users/{startDate:datetime}")]
-        public IActionResult Get(DateTime startDate)
+        // GET: api/forecast/Snapshots/date
+        [HttpGet("Snapshots/{date:datetime}")]
+        public IActionResult Get(DateTime date)
         {
             try
             {
@@ -127,8 +127,8 @@ namespace MockProject3.Api.Controllers
 
 
                 // Get all users that were created on/before the startDate and has been deleted
-                users = _userRepo.GetByDate(startDate).ToList();
-                rooms = _roomRepo.GetByDate(startDate).ToList();
+                users = _userRepo.GetByDate(date).ToList();
+                rooms = _roomRepo.GetByDate(date).ToList();
                 if (users == null || rooms == null)
                 {
                     return NotFound("No users/rooms found with the passed search critiea.");
@@ -137,10 +137,10 @@ namespace MockProject3.Api.Controllers
                 // Return the snapshot
                 var snapshot = new Snapshot()
                 {
-                    Date = startDate,
+                    Date = date,
                     UserCount = users.Count,
                     RoomCount = rooms.Count,
-                    Location = "ALL"
+                    Location = "All"
                 };
                 return Ok(snapshot);
 
@@ -163,8 +163,8 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
-        // GET: api/forecast/Users/startDate/endDate
-        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}")]
+        // GET: api/forecast/SnapshotsRange/startDate/endDate
+        [HttpGet("SnapshotsRange/{startDate:datetime}/{endDate:datetime}")]
         public IActionResult Get(DateTime startDate, DateTime endDate)
         {
             try
@@ -206,6 +206,59 @@ namespace MockProject3.Api.Controllers
         }
 
         /// <summary>
+        /// This endpoint will return the total count of Users and Rooms to the caller using the search criteria of date and office location.
+        /// </summary>
+        /// <remarks>
+        /// The format for date is yyyy-mm-dd and the format of location is city name
+        /// </remarks>
+        /// <param name="date">The date for the search.</param>
+        /// <param name="location">The location the search should be focused on.</param>
+        /// <return>
+        /// Return the total number of Users and Rooms in the database with the match search criteria.
+        /// </return>
+        // GET: api/forecast/SnapshotsByLocation/date/location
+        [HttpGet("SnapshotsByLocation/{date:datetime}/{location:alpha}")]
+        public IActionResult Get(DateTime date, string location)
+        {
+            try
+            {
+                // check if the models are correct?
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Not valid input");
+                }
+
+                List<User> users = new List<User>();
+                List<Room> rooms = new List<Room>();
+
+
+                // Find all users that were created within the range of startDate and endDate that aren't deleted
+                users = _userRepo.GetByLocation(date, location).ToList();
+                rooms = _roomRepo.GetByLocation(date, location).ToList();
+                if (users == null || rooms == null)
+                {
+                    return NotFound("No users/rooms found with the passed search critiea.");
+                }
+
+                // Return the snapshot
+                var snapshot = new Snapshot()
+                {
+                    Date = date,
+                    UserCount = users.Count,
+                    RoomCount = rooms.Count,
+                    Location = location
+                };
+                return Ok(snapshot);
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                return BadRequest("Something went wrong while processing the request.");
+            }
+        }
+
+        /// <summary>
         /// This endpoint will return the total count of Users and Rooms to the caller using the search critiea of startdate, enddate, and office location.
         /// </summary>
         /// <remarks>
@@ -217,8 +270,8 @@ namespace MockProject3.Api.Controllers
         /// <return>
         /// Return the total number of Users and Rooms in the database with the match search critiea.
         /// </return>
-        // GET: api/forecast/Users/startDate/endDate/location
-        [HttpGet("Users/{startDate:datetime}/{endDate:datetime}/{location:alpha}")]
+        // GET: api/forecast/SnapshotsRangeByLocation/startDate/endDate/location
+        [HttpGet("SnapshotsRangeByLocation/{startDate:datetime}/{endDate:datetime}/{location:alpha}")]
         public IActionResult Get(DateTime startDate, DateTime endDate, string location)
         {
             try
