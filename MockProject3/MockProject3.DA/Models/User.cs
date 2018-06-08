@@ -52,10 +52,6 @@ namespace MockProject3.DA.Models
 
         [DataType(DataType.DateTime)]
         [Column(TypeName = "datetime2")]
-        public DateTime Modified { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Column(TypeName = "datetime2")]
         public DateTime Deleted { get; set; }
     }
 

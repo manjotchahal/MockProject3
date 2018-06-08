@@ -45,6 +45,7 @@ namespace MockProject3.DA
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Snapshot> Snapshots { get; set; }
         public DbSet<User> Users { get; set; }
+
         public override int SaveChanges()
         {
             var AddedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
@@ -52,15 +53,8 @@ namespace MockProject3.DA
             AddedEntities.ForEach(E =>
             {
                 E.Property("Created").CurrentValue = DateTime.Now;
-                E.Property("Modified").CurrentValue = DateTime.Now;
             });
 
-            var ModifiedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Modified).ToList();
-
-            ModifiedEntities.ForEach(E =>
-            {
-                E.Property("Modified").CurrentValue = DateTime.Now;
-            });
             return base.SaveChanges();
         }
     }
