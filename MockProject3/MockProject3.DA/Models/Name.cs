@@ -6,7 +6,12 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
-    [Table("Name")]
+    ///<summary>The Name Class contains standard information regarding a User's name including first name, middle name, and last name.</summary>
+    ///<remarks>
+    ///Each Name will have a uniquely generated Guid Id as well as retain the primary key Guid of the previous database, which is stored in NameId.
+    ///Each Name object will have a collection of Users in the case that multiple users share the same name.
+    ///</remarks>
+    [Table("Names")]
     public class Name 
     {
         [Key]
