@@ -14,17 +14,29 @@ namespace MockProject3.Test.Mocking
 {
     public class UserTests
     {
-        private Mock<IForecastContext> _mockContext;
+        private ForecastContext _context;
         private IRepo<User> _userRepository;
 
         [Fact]
-        public void GetUsers_NoId_ReturnCollection()
+        public void GetUsers_ReturnCollection()
         {
-            // Arrange
+            var options = new DbContextOptionsBuilder<ForecastContext>()
+                .UseInMemoryDatabase(databaseName: "InMemDb")
+                .Options;
 
-            // Act
+            using(_context = new ForecastContext(options)) {
+                // Arrange
+                IEnumerable<User> users;
+                _userRepository = new UserRepo(_context);
+                _context.Users.Add(getTestUser());
+                _context.SaveChanges();
 
-            // Assert
+                // Act
+                users = _userRepository.Get();
+
+                // Assert
+                Assert.NotEmpty(users);
+            }
         }
 
         [Fact]
@@ -43,7 +55,9 @@ namespace MockProject3.Test.Mocking
         private User getTestUser() {
             User result = new User{
                 Name = new Name {
-                    NameId = Guid.NewGuid()
+                    NameId = Guid.NewGuid(),
+                    First = "first",
+                    Last = "last"
                 },
                 Id = Guid.NewGuid(),
                 Location = "Reston",

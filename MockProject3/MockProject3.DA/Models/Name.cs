@@ -27,7 +27,6 @@ namespace MockProject3.DA.Models
         [Column(TypeName = "nvarchar(MAX)")]
         public string First { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
         public string Middle { get; set; }
@@ -36,6 +35,9 @@ namespace MockProject3.DA.Models
         [DataType(DataType.Text)]
         [Column(TypeName = "nvarchar(MAX)")]
         public string Last { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime Created { get; set; }
 
         public ICollection<User> Users { get; set; }
     }
