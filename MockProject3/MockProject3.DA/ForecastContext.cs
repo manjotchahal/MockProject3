@@ -39,12 +39,12 @@ namespace MockProject3.DA
             }
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Room> Rooms { get; set; }
-        public DbSet<Batch> Batches { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Batch> Batches { get; set; }
         public DbSet<Name> Names { get; set; }
-
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Snapshot> Snapshots { get; set; }
+        public DbSet<User> Users { get; set; }
         public override int SaveChanges()
         {
             var AddedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
