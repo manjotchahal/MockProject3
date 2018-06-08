@@ -6,6 +6,11 @@ using System.Text;
 
 namespace MockProject3.DA.Models
 {
+        ///<summary>The Address class contains standard address information that will be used for Users, Batches, and Rooms</summary>
+        ///<remarks>
+        ///Each Address Object will have its own uniquely generated Guid Id and retain the primary key Guid that was generated for it in the previous database into AddressId.
+        ///Each Address Object will have a collection of Users, Objects, and Batches that share the Address.
+        ///</remarks>
         public class Address
         {
             [Key]
