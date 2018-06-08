@@ -12,7 +12,7 @@ using MockProject3.Api;
 
 namespace MockProject3.Test.Mocking
 {
-    public class UserTests
+    public class UserRepoTests
     {
         private ForecastContext _context;
         private IRepo<User> _userRepository;
